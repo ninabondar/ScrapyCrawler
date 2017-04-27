@@ -8,7 +8,7 @@
 import scrapy
 
 
-class ScraminemTestItem(scrapy.Item):
+class SampleItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass

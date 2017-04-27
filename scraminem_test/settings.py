@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for scraminem_test project
+# Scrapy settings for sample project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,16 +9,19 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scraminem_test'
+BOT_NAME = 'sample'
 
-SPIDER_MODULES = ['scraminem_test.spiders']
-NEWSPIDER_MODULE = 'scraminem_test.spiders'
+SPIDER_MODULES = ['sample.spiders']
+NEWSPIDER_MODULE = 'sample.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scraminem_test (+http://www.yourdomain.com)'
-USER_AGENT = 'Mozilla 5.0'
+#USER_AGENT = 'sample (+http://www.yourdomain.com)'
+USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36"
 
+
+RETRY_TIMES = 5
+RETRY_HTTP_CODES = [500, 502, 503, 504, 408, 403, 407, 302]
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
@@ -28,7 +31,9 @@ CONCURRENT_REQUESTS = 4
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 1
+
+DOWNLOAD_DELAY = 5
+
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -48,14 +53,15 @@ DOWNLOAD_DELAY = 1
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'scraminem_test.middlewares.ScraminemTestSpiderMiddleware': 543,
+#    'sample.middlewares.SampleSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'scraminem_test.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+	'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+	'sample.middlewares.ProxyMiddleware': 100,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -66,7 +72,7 @@ DOWNLOAD_DELAY = 1
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'scraminem_test.pipelines.ScraminemTestPipeline': 300,
+#    'sample.pipelines.SamplePipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
